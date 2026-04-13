@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spolverini Bespoke | Master Tailors | Miami & Italy</title>
+    <meta name="description"
+        content="Exclusive Italian bespoke tailoring for the modern American gentleman. Handcrafted excellence from Italy to Miami.">
+
+    <!-- Google Fonts: Serif per titoli, Sans per testi leggibili -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        :root {
+            --gold: #967948;
+            /* Un oro più profondo, elegante su bianco */
+            --dark: #1a1a1a;
+            --white: #ffffff;
+            --off-white: #fafafa;
+            --gray-light: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--dark);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header & Logo */
+        header {
+            padding: 20px 0 0 0;
+            background: var(--white);
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .logo-container img {
+            max-width: 220px;
+            /* Regola in base alle proporzioni del tuo logo */
+            height: auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+            background-color: var(--off-white);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 8vw, 3.8rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 35px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Buttons - Mobile Optimized */
+        .cta-group {
+            display: flex;
+            flex-direction: column;
+            /* Colonna su mobile */
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn {
+            width: 100%;
+            /* Full width su mobile */
+            max-width: 300px;
+            padding: 18px;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.3s;
+            text-align: center;
+            border-radius: 2px;
+        }
+
+        .btn-dark {
+            background: var(--dark);
+            color: var(--white);
+            border: 1px solid var(--dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--dark);
+            border: 1px solid var(--dark);
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .feature-img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            /* 1 colonna su mobile */
+            gap: 30px;
+        }
+
+        .service-item {
+            padding: 30px;
+            background: var(--off-white);
+            border-left: 3px solid var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 0;
+            background: var(--off-white);
+            text-align: center;
+            border-top: 1px solid var(--gray-light);
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Media Queries per Tablet e Desktop */
+        @media (min-width: 768px) {
+            .cta-group {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .btn {
+                width: auto;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hero {
+                padding: 120px 0;
+            }
+
+            .split-section {
+                display: flex;
+                align-items: center;
+                gap: 60px;
+            }
+
+            .split-section>div {
+                flex: 1;
+            }
+        }
+    </style>
+
+    <style>
+        /* --- Animazioni Core --- */
+
+        /* Stato iniziale degli elementi che devono apparire scorrendo */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0.6, 0.2, 1);
+        }
+
+        /* Stato quando l'elemento diventa visibile */
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animazione di atterraggio (Hero) */
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            animation: heroFadeIn 1s ease-out forwards;
+        }
+
+        .hero-content p {
+            opacity: 0;
+            animation: heroFadeIn 1s ease-out 0.3s forwards;
+            /* Parte con 0.3s di ritardo */
+        }
+
+        .hero-content .cta-group {
+            opacity: 0;
+            animation: heroFadeIn 1s ease-out 0.6s forwards;
+            /* Parte con 0.6s di ritardo */
+        }
+
+        /* Effetto micro-interazione sui bottoni */
+        .btn {
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+            /* Feedback al tocco su smartphone */
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container logo-container reveal">
+            <img src="logo.png" alt="Spolverini Bespoke Logo">
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>The Excellence of Custom Tailoring</h1>
+            <p>Italian tailoring at its highest expression.<br /> Crafted exclusively by appointment.</p>
+            <div class="cta-group">
+                <a href="#booking" class="btn btn-dark" id="square-booking-button">Book an Appointment</a>
+                <a href="#contact" class="btn btn-outline">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container">
+        <div class="split-section reveal">
+            <div>
+                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=800"
+                    alt="Bespoke Suit Detail" class="feature-img">
+            </div>
+            <div>
+                <div class="section-title" style="text-align: left;">
+                    <h2 style="padding-left: 0;">Spolverini Bespoke</h2>
+                </div>
+                <p>
+                    Spolverini Bespoke is a luxury tailoring service dedicated to delivering artisanal chraftsmanship
+                    directly to your homee.
+                    We combine Italian chrafted excellence with modern convenience, specializing in quiet luxury
+                    aesthetics and truly personlized service.
+                    Our philosophy centers on letting the quality of our wirk speak for itself, without unnecessary
+                    branding or ostentation.
+                </p>
+                <br />
+                <p>Every piece is crafted in Italy with the utmost attention to detail, ensuring a fit that is as unique
+                    as your thumbprint.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background-color: var(--off-white);">
+        <div class="container reveal">
+            <div class="section-title">
+                <h2>Our Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-item">
+                    <h3>Bespoke</h3>
+                    <p>The pinnacle of tailoring. A completely custom pattern and multiple fittings.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Made-to-Measure</h3>
+                    <p>Perfect for the professional who demands quality with a streamlined process.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Trunk Shows</h3>
+                    <p>We visit New York, Chicago, and Los Angeles throughout the year.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="section container" style="text-align: center;">
+        <div class="section-title">
+            <h2>Reserve Your Session</h2>
+        </div>
+        <p style="margin-bottom: 30px;">Inquire about our seasonal schedule or book a private fitting in our showroom.
+        </p>
+        <div class="cta-group">
+            <a href="#booking" class="btn btn-dark" id="square-booking-button">Book an Appointment</a>
+            <a href="tel:+1000000000" id="contact" class="btn btn-outline">Contact Us</a>
+        </div>
+    </section>
+
+
+    <!-- Start Square Appointments Embed Code -->
+    <script src='https://square.site/appointments/buyer/widget/7b421u1dcv3bbw/LZKTMD3VX4DNQ.js'></script>
+    <!-- End Square Appointments Embed Code -->
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SPOLVERINI BESPOKE. ALL RIGHTS RESERVED.</p>
+            <p style="letter-spacing: 2px; margin-top: 10px;">ITALY | MIAMI</p>
+        </div>
+    </footer>
+
+    <script>
+        // Funzione per gestire l'apparizione allo scroll
+        const observerOptions = {
+            threshold: 0.15 // L'animazione parte quando il 15% dell'elemento è visibile
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Seleziona tutti gli elementi con classe .reveal e osservali
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
