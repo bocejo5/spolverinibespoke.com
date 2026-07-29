@@ -65,11 +65,11 @@
     <style>
         :root {
             --gold: #967948;
-            /* Un oro più profondo, elegante su bianco */
-            --dark: #1a1a1a;
+            --gold-light: #c9a769;
+            --dark: #12100d;
             --white: #ffffff;
-            --off-white: #fafafa;
-            --gray-light: #e0e0e0;
+            --off-white: #f7f5f0;
+            --gray-light: #e6ddd0;
         }
 
         * {
@@ -79,7 +79,6 @@
         }
 
         html {
-            scroll-behavior: smooth;
             scroll-padding-top: 90px;
         }
 
@@ -96,6 +95,42 @@
         h3 {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .eyebrow {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .ornament::before,
+        .ornament::after {
+            content: '';
+            width: 28px;
+            height: 1px;
+            background: var(--gray-light);
+        }
+
+        .ornament span {
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            flex-shrink: 0;
         }
 
         .container {
@@ -106,9 +141,9 @@
 
         /* Header & Logo */
         header {
-            padding: 14px 0;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(6px);
+            padding: 16px 0;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(8px);
             text-align: center;
             position: sticky;
             top: 0;
@@ -143,27 +178,34 @@
         .main-nav a {
             color: var(--dark);
             text-decoration: none;
-            font-size: 0.75rem;
-            letter-spacing: 1.5px;
+            font-size: 0.72rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            font-weight: 600;
+            font-weight: 500;
             position: relative;
             padding-bottom: 4px;
+            transition: color 0.3s ease, letter-spacing 0.3s ease;
         }
 
         .main-nav a::after {
             content: '';
             position: absolute;
-            left: 0;
+            left: 50%;
             bottom: 0;
             width: 0;
             height: 1px;
             background: var(--gold);
-            transition: width 0.3s ease;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--gold);
+            letter-spacing: 2.5px;
         }
 
         .main-nav a:hover::after {
             width: 100%;
+            left: 0;
         }
 
         /* Hero Section */
@@ -171,32 +213,44 @@
             padding: 80px 0;
             text-align: center;
             background:
-                linear-gradient(rgba(26, 26, 26, 0.55), rgba(26, 26, 26, 0.72)),
+                radial-gradient(ellipse at center, rgba(10, 9, 7, 0.35), rgba(10, 9, 7, 0.86)),
+                linear-gradient(rgba(12, 11, 9, 0.5), rgba(12, 11, 9, 0.78)),
                 url('https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
             color: var(--white);
         }
 
         .hero-kicker {
             display: inline-block;
-            font-size: 0.75rem;
-            letter-spacing: 4px;
+            font-size: 0.72rem;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 18px;
+            color: var(--gold-light);
+            margin-bottom: 14px;
             font-weight: 600;
+        }
+
+        .hero-content .ornament {
+            margin-bottom: 22px;
+        }
+
+        .hero-content .ornament::before,
+        .hero-content .ornament::after {
+            background: rgba(255, 255, 255, 0.25);
         }
 
         .hero h1 {
             font-size: clamp(2.2rem, 8vw, 3.8rem);
             line-height: 1.2;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             color: var(--white);
+            font-style: italic;
         }
 
         .hero p {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: 35px;
+            font-size: 1.05rem;
+            letter-spacing: 0.3px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
@@ -215,15 +269,15 @@
             width: 100%;
             /* Full width su mobile */
             max-width: 300px;
-            padding: 18px;
+            padding: 17px 24px;
             text-transform: uppercase;
             text-decoration: none;
-            letter-spacing: 2px;
-            font-size: 0.85rem;
+            letter-spacing: 3px;
+            font-size: 0.78rem;
             font-weight: 600;
             transition: 0.3s;
             text-align: center;
-            border-radius: 2px;
+            border-radius: 1px;
         }
 
         .btn-dark {
@@ -271,29 +325,34 @@
 
         /* Content Sections */
         .section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .section-title h2 {
-            font-size: 2rem;
-            position: relative;
-            padding-bottom: 15px;
+            font-size: 2.1rem;
+            margin-bottom: 18px;
         }
 
-        .section-title h2::after {
-            content: '';
-            width: 40px;
-            height: 2px;
-            background: var(--gold);
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
+        .section-title .ornament {
+            margin-top: 0;
+        }
+
+        .section-title.align-left {
+            text-align: left;
+        }
+
+        .section-title.align-left .ornament {
+            margin: 0;
+            justify-content: flex-start;
+        }
+
+        .section-title.align-left .ornament::before {
+            display: none;
         }
 
         .feature-img {
@@ -310,26 +369,51 @@
         }
 
         .service-item {
-            padding: 30px;
+            padding: 45px 35px;
             background: var(--white);
-            border-left: 3px solid var(--gold);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 1px 0 var(--gray-light);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.4s ease, left 0.4s ease;
         }
 
         .service-item:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.07);
+        }
+
+        .service-item:hover::before {
+            width: 100%;
+            left: 0;
         }
 
         .service-icon {
-            width: 42px;
-            height: 42px;
-            margin-bottom: 18px;
+            width: 34px;
+            height: 34px;
+            margin-bottom: 22px;
             color: var(--gold);
         }
 
         .service-item h3 {
-            margin-bottom: 10px;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .service-item p {
+            color: #666;
+            font-size: 0.95rem;
         }
 
         /* Process / How It Works */
@@ -346,6 +430,8 @@
         }
 
         .process-step .step-number {
+            position: relative;
+            z-index: 1;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -353,30 +439,41 @@
             height: 54px;
             border: 1px solid var(--gold);
             border-radius: 50%;
+            background: var(--white);
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
+            font-style: italic;
             color: var(--gold);
-            margin: 0 auto 18px;
+            margin: 0 auto 20px;
         }
 
         .process-step h3 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            letter-spacing: 0.4px;
             margin-bottom: 8px;
         }
 
         .process-step p {
             color: #666;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
         }
 
         /* Footer */
         footer {
-            padding: 50px 0;
-            background: var(--off-white);
+            padding: 60px 0 40px;
+            background: var(--dark);
             text-align: center;
-            border-top: 1px solid var(--gray-light);
-            font-size: 0.8rem;
-            color: #888;
+            border-top: 2px solid var(--gold);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        footer p:first-child {
+            color: rgba(255, 255, 255, 0.85);
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
         }
 
         /* Media Queries per Tablet e Desktop */
@@ -403,6 +500,21 @@
 
             .process-grid {
                 grid-template-columns: repeat(4, 1fr);
+            }
+
+            .process-step::after {
+                content: '';
+                position: absolute;
+                top: 27px;
+                left: calc(50% + 27px);
+                width: calc(100% - 54px);
+                height: 1px;
+                background: var(--gray-light);
+                z-index: 0;
+            }
+
+            .process-step:last-child::after {
+                display: none;
             }
 
             header .container {
@@ -503,10 +615,11 @@
     <section class="hero">
         <div class="container hero-content">
             <span class="hero-kicker">Italy &middot; Miami</span>
+            <div class="ornament"><span></span></div>
             <h1>The Excellence of Custom Tailoring</h1>
             <p>Italian tailoring at its highest expression.<br /> Crafted exclusively by appointment.</p>
             <div class="cta-group">
-                <a href="#booking" class="btn btn-dark" id="square-booking-button">Book an Appointment</a>
+                <a href="#booking" class="btn btn-dark" id="hero-booking-button">Book an Appointment</a>
                 <a href="#contact" class="btn btn-outline">Contact Us</a>
             </div>
         </div>
@@ -520,8 +633,10 @@
                     decoding="async">
             </div>
             <div>
-                <div class="section-title" style="text-align: left;">
-                    <h2 style="padding-left: 0;">Spolverini Bespoke</h2>
+                <div class="section-title align-left">
+                    <span class="eyebrow">Who We Are</span>
+                    <h2>Spolverini Bespoke</h2>
+                    <div class="ornament"><span></span></div>
                 </div>
                 <p>
                     Spolverini Bespoke is a luxury tailoring service dedicated to delivering artisanal craftsmanship
@@ -542,7 +657,9 @@
     <section id="services" class="section" style="background-color: var(--off-white);">
         <div class="container reveal">
             <div class="section-title">
+                <span class="eyebrow">What We Offer</span>
                 <h2>Our Services</h2>
+                <div class="ornament"><span></span></div>
             </div>
             <div class="services-grid">
                 <div class="service-item">
@@ -588,7 +705,9 @@
 
     <section id="process" class="section container">
         <div class="section-title reveal">
+            <span class="eyebrow">The Experience</span>
             <h2>How an Appointment Works</h2>
+            <div class="ornament"><span></span></div>
         </div>
         <div class="process-grid reveal">
             <div class="process-step">
@@ -616,7 +735,9 @@
 
     <section id="booking" class="section container" style="text-align: center;">
         <div class="section-title">
+            <span class="eyebrow">By Appointment Only</span>
             <h2>Reserve Your Session</h2>
+            <div class="ornament"><span></span></div>
         </div>
         <p style="margin-bottom: 30px;">Inquire about our seasonal schedule or book a private fitting in our showroom.
         </p>
@@ -661,6 +782,13 @@
         const siteHeader = document.getElementById('site-header');
         window.addEventListener('scroll', () => {
             siteHeader.classList.toggle('scrolled', window.scrollY > 10);
+        });
+
+        // Attiva lo smooth scroll solo dopo il caricamento iniziale, cosi' un
+        // eventuale hash nell'URL (es. #booking) salta subito invece di scorrere
+        // in modo animato appena si atterra sulla pagina.
+        window.addEventListener('load', () => {
+            document.documentElement.style.scrollBehavior = 'smooth';
         });
     </script>
 </body>
