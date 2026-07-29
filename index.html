@@ -203,6 +203,22 @@
             letter-spacing: 2.5px;
         }
 
+        .nav-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav-group .btn {
+            width: auto;
+            max-width: none;
+            padding: 9px 20px;
+            font-size: 0.66rem;
+            letter-spacing: 2px;
+        }
+
         .main-nav a:hover::after {
             width: 100%;
             left: 0;
@@ -294,6 +310,12 @@
             color: var(--white);
             opacity: 1;
             text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .calendar-embed {
+            margin-top: 45px;
+            display: flex;
+            justify-content: center;
         }
 
         .btn-dark {
@@ -682,13 +704,16 @@
             <div class="logo-container">
                 <img src="logo.png" alt="Spolverini Bespoke Logo">
             </div>
-            <nav class="main-nav">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#process">Process</a>
-                <a href="#booking">Booking</a>
-                <a href="#contact">Contact</a>
-            </nav>
+            <div class="nav-group">
+                <nav class="main-nav">
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#process">Process</a>
+                    <a href="#booking">Booking</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <a href="#booking" class="btn btn-dark" id="nav-booking-button">Book</a>
+            </div>
         </div>
     </header>
 
@@ -856,12 +881,12 @@
             <a href="mailto:info@spolverinisartoria.com" id="contact" class="btn btn-outline">Contact Us</a>
         </div>
         <p class="cta-microcopy">We Reply Within 24 Hours</p>
+
+        <!-- Il calendario Square viene caricato solo su richiesta, non al caricamento della pagina -->
+        <div class="calendar-embed" id="calendar-embed">
+            <button type="button" class="btn btn-outline" id="show-calendar-btn">View Available Appointments</button>
+        </div>
     </section>
-
-
-    <!-- Start Square Appointments Embed Code -->
-    <script src='https://square.site/appointments/buyer/widget/7b421u1dcv3bbw/LZKTMD3VX4DNQ.js'></script>
-    <!-- End Square Appointments Embed Code -->
 
     <footer>
         <div class="container">
@@ -893,6 +918,26 @@
         const siteHeader = document.getElementById('site-header');
         window.addEventListener('scroll', () => {
             siteHeader.classList.toggle('scrolled', window.scrollY > 10);
+        });
+
+        // Carica il widget di prenotazione Square solo quando l'utente lo richiede
+        // esplicitamente: il widget inserisce un iframe che, al caricamento, ruba
+        // il focus e fa scorrere la pagina verso il basso, oltre a mostrare il
+        // banner cookie di Square. Caricandolo on-demand evitiamo entrambe le cose
+        // per chi sta solo visitando la pagina.
+        function loadSquareWidget() {
+            if (window.__squareWidgetLoaded) return;
+            window.__squareWidgetLoaded = true;
+            const container = document.getElementById('calendar-embed');
+            container.innerHTML = '';
+            const script = document.createElement('script');
+            script.src = 'https://square.site/appointments/buyer/widget/7b421u1dcv3bbw/LZKTMD3VX4DNQ.js';
+            container.appendChild(script);
+        }
+
+        ['show-calendar-btn', 'hero-booking-button', 'square-booking-button', 'nav-booking-button'].forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('click', loadSquareWidget);
         });
 
         // Attiva lo smooth scroll solo dopo il caricamento iniziale, cosi' un
